@@ -1,0 +1,220 @@
+﻿body {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+}
+  
+#mainCanvas {
+    position: relative;
+       
+} 
+ 
+.canvasTitle {
+    width: 100%;
+    height: 47px;
+    background: #075E54;
+    font-size: 23px;
+    text-align: center;
+    color: white;
+    padding-top: 7px;
+    position: fixed;
+    top: 0;
+}
+
+    /*Subtitle settings*/
+    .canvasTitle div {
+        font-size: 13px;
+    }
+
+    .canvasTitle img {
+        height: 40px; 
+        position: absolute;
+        left: 10px;
+        cursor: pointer;
+    }
+
+.canvasFooter { 
+    width: 100%;
+    height: 40px;
+    background: #075E54;
+    position: fixed;
+    bottom: 0px;
+}
+ 
+.canvasBody {
+    width: 100%;
+    background: #F8F8F8;
+    margin-top: 57px;
+    margin-bottom: 94px;
+}
+
+.menuList {
+    padding:2px 20px;
+}
+
+.menuItem {
+    background: #52CABC;
+    padding: 15px 15px 15px 50px;
+    font-size: 20px;
+    color: #004234;
+    margin: 7px;
+    cursor: pointer;
+}
+
+    .menuItem.green {
+        background: #38FF7A !important;
+    }
+
+        .menuItem.green:hover {
+            background: #20E762 !important;
+        }
+
+    .menuItem.red {
+        background: #FF7068 !important;
+    }
+
+        .menuItem.red:hover {
+            background: #D3443C !important;
+            color: #FFFFFF !important;
+        }
+
+    .menuItem img {
+        position: absolute;
+        height: 50px;
+        top: 2px;
+        left: 0px;
+    }
+
+    .menuItem:hover {
+        background: #2EA698;
+        border: 1px solid #0A8274;
+    }
+
+.gmailLogin {
+    padding: 10px;
+    margin: 20px;
+    background: #52CABC;
+    font-size: 15px;
+    color: #004234;
+}
+
+    .gmailLogin input {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 9px;
+        margin-bottom: 10px;
+        font-size: 15px;
+    }
+
+.actionButtons input {
+    height: 30px;
+    width: 55%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.actionButtons #btnBack {
+    width: 43% !important;
+}
+
+.genInput {
+    /*Usually different input controls like TextArea, Select, Input etc have different input widths; to make it uniform following 3 lines are must.*/
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 7px;
+    margin: 5px;
+}
+
+.roundButton {
+    background: #e7a61a;
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+    width: 40px;
+    height: 40px;
+    border: 1px solid #A48101;
+    font-size: 30px;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    -webkit-box-shadow: 5px 5px 7px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 7px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 7px 0px rgba(0,0,0,0.75);
+}
+
+    .roundButton:hover {
+        background: #FFC236;
+    }
+
+
+/*Formating of Controls for Income & Expense starts here*/
+.itemIE {
+    border: 1px solid #D8D8D8;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: block;
+    overflow: auto;
+}
+  
+.monthYearIE {
+    padding: 2px;
+    margin: 2px 3px 4px 3px;
+    background: #D4EAF4;
+    color: #4E595E;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10%;
+}
+ 
+.incExpViewIE {
+    width: 99%;
+    padding: 2px 2px 13px 2px;
+
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */
+    border-bottom:1px solid #D0CFCA;
+}
+
+    .incExpViewIE:hover {
+        cursor: pointer;
+        background: #EAEAEA;
+    }
+
+
+.incExpDateIE {
+    font-size: 12px;
+    color: #3B3B3B;
+    font-weight: bold;
+}
+
+.incExpDetailIE, .incExpInfoIE {
+    color: #444444;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.incExpInfoIE {
+    font-weight: bold;
+    width: 70%;
+    float: left;
+    color: #BF7E00;
+}
+
+.incExpAmountIE {
+    width: 28%;
+    text-align: right;
+    float: left;
+    color: #0A8274;
+    font-weight: bold;
+}

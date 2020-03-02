@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <title>RoboPet</title>
+    <script language="javascript">
+        var screenHeight=0;
+        var screenWidth = 0;
+        var canvas;
+        function getsetScreenSize()
+        {
+            screenWidth = window.screen.width;
+            screenHeight = window.screen.height;
+
+            canvas = document.getElementById("mainCanvas");
+            canvas.style.height = screenHeight + "px";
+
+            var canvasBody = canvas.querySelector(".canvasBody");
+            canvasBody.style.height = (screenHeight - 50 - 40) + "px"; //Remove TitleHeight and FooterHeight from body height
+        }
+
+        function goPage(pageName)
+        {
+            alert(pageName)
+            window.location.href = pageName;
+        }
+
+
+
+    </script>
+
+
+</head>
+<body>
+    <div id="mainCanvas">
+        <div class="canvasTitle">
+            <img src="img\logo.png" alt="RoboPet" />
+            RoboPet
+            <div>Apka Apna Paltu Robot Kutta</div>
+        </div>
+        <div class="canvasBody">
+
+        </div>
+        <div class="canvasFooter"></div>
+    </div>
+    <script>
+        getsetScreenSize();
+    </script>
+</body>
+</html>

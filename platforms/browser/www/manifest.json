@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "robopet",
+  "short_name": "robopet",
+  "version": "maruti.robopet.com",
+  "description": "This application helps to keep record of various things as follows.\r\n        a) Income details.\r\n        b) Expense track\r\n        c) Lending information (receivable from friends) etc.",
+  "author": "Maruti Laxman Tathe",
+  "icons": [],
+  "start_url": "index.html"
+}

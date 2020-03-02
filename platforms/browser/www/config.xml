@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="maruti.robopet.com" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>robopet</name>
+    <description>
+        This application helps to keep record of various things as follows.
+        a) Income details.
+        b) Expense track
+        c) Lending information (receivable from friends) etc.
+    </description>
+    <author email="marutitathe@gmail.com.com" href="http://www.marutitathe.com">
+        Maruti Laxman Tathe
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+</widget>
