@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <title>RoboPet</title>
+
+    <script type="text/javascript" src="cordova.js"></script>
+
+
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <script language="javascript">
+        var screenHeight=0;
+        var screenWidth = 0;
+        var canvas;
+        var incExp = 0;
+        var aalEejWel = 0;
+
+        function checkDeviceReady() {
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+        }
+
+
+        function onDeviceReady()
+        {
+            aalEejWel = 1;
+
+            var element = document.getElementById('deviceProperties');
+
+            element.innerHTML = 'Device Name: ' + device.name + '<br />' +
+                                'Device PhoneGap: ' + device.phonegap + '<br />' +
+                                'Device Platform: ' + device.platform + '<br />' +
+                                'Device UUID: ' + device.uuid + '<br />' +
+                                'Device Version: ' + device.version + '<br />';
+            var dtEntry = document.getElementById("entryDate");
+
+            //Converting HTML5 date input control into Native Date control
+            if (device.platform.toLowerCase() != "browser") {
+                dtEntry.type = "text"; //Convert the input type so that local datePicker control is avoided
+                dtEntry.readOnly = true;
+                //dtEntry.onfocus = addCalendar;
+                dtEntry.onclick = addCalendar;
+                //dtEntry.onkeydown = NoKeyAllowed;
+            }
+
+            var CurrDate = new Date();
+            var MM = "01";
+            if (device.platform.toLowerCase() != "browser") {
+                MM = date.getMonth() + 1; //Android month starts from 0
+            }
+            else
+            {
+                MM = date.getMonth(); //Android month starts from 0
+            }
+            
+            var dtDDMMYYYY = ("0" + date.getDate()).slice(-2) + "/" + ("0" + MM).slice(-2) + "/" + date.getFullYear();
+            dtEntry.value = dtDDMMYYYY;
+            dtEntry.dateValue = date;
+
+            dtEntry.focus();
+        }
+
+        function addCalendar()
+        {
+            calendar(this);
+        }
+
+        function NoKeyAllowed()
+        {
+            return false;
+        }
+
+        var THEME_DEVICE_DEFAULT_LIGHT = 5;
+        function calendar(o) {
+
+            //o.type = "text"; //Convert the current input type so that local datePicker control is avoided
+
+            var options = {
+                date: new Date(),
+                mode: 'date',
+                androidTheme: THEME_DEVICE_DEFAULT_LIGHT,
+                doneButtonLabel: 'DONE',
+                doneButtonColor: '#F2F3F4',
+                cancelButtonLabel: 'CLOSE',
+                cancelButtonColor: '#000000'
+            };
+
+            datePicker.show(options, function (date) {
+                //var dx = Date.parse(date);
+                var MM = date.getMonth() + 1; //Android month starts from 0
+                var dtDDMMYYYY = ("0" + date.getDate()).slice(-2) + "/" + ("0" + MM).slice(-2) + "/" + date.getFullYear();
+                o.value = dtDDMMYYYY;
+                o.dateValue = date;
+            });
+
+        }
+
+        function showIncExpBox(incOrExp)
+        {
+            t = document.getElementById("incExpTitle")
+            if (incOrExp == 1)
+            {
+                t.innerText = "Income Entry";
+                fillIncomeCats();
+                incExp = 1;
+            }
+            else
+            {
+                t.innerHTML = "Expense Entry";
+                fillExpenseCats();
+                incExp=0;
+            }
+
+            b = document.getElementById("incExpBox");
+            m = document.getElementById("menuList_");
+
+            b.style.display = "block";
+            m.style.display = "none"; //Hide current menu to show entry box.
+            
+            return true;
+
+        }
+
+        function goBack()
+        {
+            b = document.getElementById("incExpBox");
+            m = document.getElementById("menuList_");
+
+            b.style.display = "none";
+            m.style.display = "block"; //Hide current menu to show entry box.
+        }
+
+        function fillIncomeCats()
+        {
+
+        }
+
+        function fillExpenseCats()
+        {
+
+        }
+
+        function saveIncExp()
+        {
+            var extraInfo = "";
+
+            var _IEDate;
+            //If its not browser we are showing dd/MM/yyyy date which is not really a date in ANDROID or iOS
+            //hence we are saving actual date result in dateValue attribute of entryDate input text.
+            if (device.platform.toLowerCase() != "browser")
+            {
+                _IEDate = Date.parse(document.getElementById("entryDate").dateValue);
+            }
+            else
+            {
+                _IEDate = Date.parse(document.getElementById("entryDate").value);
+            }
+            if(isNaN(_IEDate))
+            {
+                showShortToastTop("Wrong Date Entered");
+                document.getElementById("entryDate").focus();
+                return;
+            }
+
+            var CategoryList = document.getElementById("ddlCat");
+            var _Category = CategoryList[CategoryList.selectedIndex].value;
+
+            var _IEDetail = document.getElementById("txtDetails").value.toString().trim();
+
+            var _Amount = document.getElementById("txtAmount").value;
+            if(isNaN(_Amount))
+            {
+                showShortToastTop("Wrong Amount Format");
+                document.getElementById("txtAmount").focus();
+                return;
+            }
+            if (_Amount <= 0)
+            {
+                showShortToastTop("Wrong Amount Entered (Zero Value Not Allowed)");
+                document.getElementById("txtAmount").focus();
+                return;
+            }
+
+            var db = null;
+            //Starg Saving Process As It Looks Ass OK
+            if(aalEejWel)
+            {
+                try {
+                    if (device.platform == "Android") {
+                        extraInfo = "Opening SQLite DB";
+                        db = window.sqlitePlugin.openDatabase({
+                            name: "roboPet.db", location: "default", androidDatabaseImplementation: 2
+                        });
+                    }
+                    else {
+                        extraInfo = "Opening WebSQL DB";
+                        db = window.openDatabase('roboPet.db', '1.0', 'roboPet Database', 2 * 1024 * 1024);
+                    }
+
+                    var strSQL = "INSERT INTO IncExp(IncExp, IEDate, Category, IEDetail, Amount) VALUES(" + incExp + ", " + _IEDate + ", " + _Category + ", '" + _IEDetail + "', " + _Amount + ")"
+
+                    extraInfo = "Performing SQL: " + strSQL;
+                    db.transaction(function (tx) {
+                        //tx.executeSql("DROP TABLE IF EXISTS IncExp");
+
+                        tx.executeSql(strSQL);
+                    }, errorSQL);
+
+                    var msgSuccess = "Expense Record Saved.";
+                    if (incExp == 1)
+                    {
+                        msgSuccess = "Income Record Saved";
+                    }
+                    showLongToastTop(msgSuccess);
+
+                } catch (e) {
+                    alert("ERROR: "+e.message)
+                }
+            }
+            else
+            {
+                showLongToastTop("It Seems That Device Is Not Ready.");
+            }
+            
+        }
+
+
+
+
+
+        
+    </script>
+
+
+</head>
+<body onload="checkDeviceReady();">
+    <div id="mainCanvas">
+        <div class="canvasTitle">
+            <img src="img\backbutton1.png" alt="goBack" onclick="javascript: window.history.back();" />
+            RoboPet
+            <div>Apka Apna Paltu Robot Kutta</div>
+        </div>
+        <div class="canvasBody">
+            <div id="menuList_" class="menuList">
+                <div class="menuItem green" onclick="return showIncExpBox(1);">
+                    <img src="" alt="" />Income
+                </div>
+                <div class="menuItem red" onclick="return showIncExpBox(0);">
+                    <img src="" alt="" />Expense
+                </div>
+            </div>
+            <form action="#">
+                <div id="incExpBox" class="IncExp" style="display:none;margin:20px;">
+                    <p id="incExpTitle">Income Entry</p>
+                    <br />
+                    <!--<input type="date" id="entryDate" contenteditable="true" placeholder="Entry Date" class="genInput" />-->
+                    <!--<input type="date" id="entryDate" contenteditable="true" placeholder="Entry Date" class="genInput" onfocus="calendar(this);" onkeydown="return false;" />-->
+                    <!-- Adding OnFocus and OnKeyDown events to this control if it is not browser (so that Android and iOS can show native datePicker) -->
+                    <input type="date" id="entryDate" contenteditable="true" placeholder="Entry Date" class="genInput" dateValue="" />
+                    <select id="ddlCat" class="ddlCat genInput">
+                        <option value="1">General Exp</option>
+                        <option value="2">MSEB Exp</option>
+                    </select>
+                    <textarea id="txtDetails" placeholder="Expense Details" rows="3" class="genInput"></textarea>
+                    <input id="txtAmount" type="number" value="0.00" class="genInput" onfocus="this.select(); this.setSelectionRange(0, this.value.length);" />
+
+                    <div class="actionButtons">
+                        <input id="btnBack" type="button" value="Back" onclick="goBack();" />
+                        <input id="btnSave" type="button" value="Save" onclick="saveIncExp();" />
+                    </div>
+
+                    <p id="deviceProperties">Loading device properties...</p>
+
+                </div>
+            </form>
+        </div>
+        <div class="canvasFooter"></div>
+    </div>
+    <script>
+        getsetScreenSize();
+    </script>
+</body>
+</html>
