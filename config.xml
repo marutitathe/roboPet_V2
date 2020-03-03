@@ -123,5 +123,5 @@
     <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
     <gap:plugin name="SQLitePlugin" value="io.liteglue.SQLitePlugin"/>
     <gap:plugin name="SQLitePlugin" value="SQLitePlugin" />
-    <gap:plugin name="SQLitePlugin" value="org.sqliteexample.sample.sqlitePlugin.SQLitePlugin"/>    
+    <gap:plugin name="SQLitePlugin" value="org.sqliteexample.sample.sqlitePlugin.SQLitePlugin"/> 
 </widget>
