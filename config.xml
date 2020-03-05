@@ -13,6 +13,7 @@
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="16" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
@@ -106,7 +107,8 @@
     <feature name="DatePickerPlugin">
         <param name="android-package" value="com.okaybmd.cordova.plugin.datepicker.DatePickerPlugin" />
     </feature>
-    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    
+    
     <engine name="android" spec="7.0.0" />
     <plugin name="cordova-plugin-battery-status" spec="~1.2.4" />
     <plugin name="cordova-plugin-camera" spec="~2.4.1" />
