@@ -9,6 +9,9 @@
   "installed_plugins": {
     "cordova-sqlite-evcore-extbuild-free": {
       "PACKAGE_NAME": "maruti.robopet.com"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "maruti.robopet.com"
     }
   },
   "dependent_plugins": {}

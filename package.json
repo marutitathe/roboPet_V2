@@ -19,9 +19,9 @@
       "cordova-plugin-network-information": {},
       "cordova-plugin-vibration": {},
       "cordova-plugin-x-toast": {},
-      "cordova-sqlite-storage": {},
       "cordova-plugin-datepicker": {},
-      "cordova-sqlite-evcore-extbuild-free": {}
+      "cordova-sqlite-evcore-extbuild-free": {},
+      "cordova-sqlite-storage": {}
     }
   },
   "dependencies": {
@@ -40,6 +40,6 @@
     "cordova-plugin-vibration": "~2.1.5",
     "cordova-plugin-x-toast": "~2.6.2",
     "cordova-sqlite-evcore-extbuild-free": "^0.11.0",
-    "cordova-sqlite-storage": "^2.3.1"
+    "cordova-sqlite-storage": "^4.0.0"
   }
 }

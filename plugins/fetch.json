@@ -111,18 +111,18 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-sqlite-storage": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-sqlite-storage@^2.3.1"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-datepicker": {
     "source": {
       "type": "registry",
       "id": "cordova-plugin-datepicker@^0.9.3"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-sqlite-storage": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-sqlite-storage"
     },
     "is_top_level": true,
     "variables": {}
