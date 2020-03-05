@@ -44,7 +44,7 @@
     <feature name="DatePickerPlugin">
         <param name="android-package" value="com.plugin.datepicker.DatePickerPlugin" />
     </feature>
-    <name>robopet</name>
+    <name>roboPet</name>
     <description>
         This application helps to keep record of various things as follows.
         a) Income details.

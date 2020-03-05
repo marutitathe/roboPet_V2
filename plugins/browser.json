@@ -1,0 +1,15 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-sqlite-evcore-extbuild-free": {
+      "PACKAGE_NAME": "maruti.robopet.com"
+    }
+  },
+  "dependent_plugins": {}
+}

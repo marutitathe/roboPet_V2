@@ -420,6 +420,14 @@ module.exports = [
         "clobbers": [
             "SQLitePlugin"
         ]
+    },
+    {
+        "file": "plugins/cordova-sqlite-evcore-extbuild-free/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-evcore-extbuild-free.SQLitePlugin",
+        "pluginId": "cordova-sqlite-evcore-extbuild-free",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -439,7 +447,8 @@ module.exports.metadata =
     "cordova-plugin-vibration": "2.1.6",
     "cordova-plugin-x-toast": "2.6.2",
     "cordova-sqlite-storage": "2.3.1",
-    "cordova-plugin-datepicker": "0.9.3"
+    "cordova-plugin-datepicker": "0.9.3",
+    "cordova-sqlite-evcore-extbuild-free": "0.11.0"
 }
 // BOTTOM OF METADATA
 });

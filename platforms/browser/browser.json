@@ -66,6 +66,9 @@
     },
     "cordova-plugin-datepicker": {
       "PACKAGE_NAME": "maruti.robopet.com"
+    },
+    "cordova-sqlite-evcore-extbuild-free": {
+      "PACKAGE_NAME": "maruti.robopet.com"
     }
   },
   "dependent_plugins": {},
@@ -490,6 +493,14 @@
       "clobbers": [
         "SQLitePlugin"
       ]
+    },
+    {
+      "file": "plugins/cordova-sqlite-evcore-extbuild-free/www/SQLitePlugin.js",
+      "id": "cordova-sqlite-evcore-extbuild-free.SQLitePlugin",
+      "pluginId": "cordova-sqlite-evcore-extbuild-free",
+      "clobbers": [
+        "SQLitePlugin"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -507,6 +518,7 @@
     "cordova-plugin-vibration": "2.1.6",
     "cordova-plugin-x-toast": "2.6.2",
     "cordova-sqlite-storage": "2.3.1",
-    "cordova-plugin-datepicker": "0.9.3"
+    "cordova-plugin-datepicker": "0.9.3",
+    "cordova-sqlite-evcore-extbuild-free": "0.11.0"
   }
 }

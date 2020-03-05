@@ -88,7 +88,11 @@
 
                         var evenOdd = 1;
 
-                        if (rlen == 0) return; //No Rows To Execute;
+                        if (rlen == 0) 
+                        {
+                            showNoData();
+                            return; //No Rows To Execute;
+                        }
                         try {
                             logStep("Starting list creation.", 0);
                             for (var i = 0; i <= rlen-1; i++) {
@@ -217,12 +221,20 @@
             } catch (e) {
                 alert(e.message);
                 logStep(e.message.trim(),0);
+                showNoData();
             }
         }
 
         function successSQL()
         {
             logStep("Success");
+        }
+
+        function showNoData()
+        {
+            var showNoIncExp  = document.getElementsByClassName("noIncExpList");
+
+            showNoIncExp.style.display = "block";
         }
 
     </script>
@@ -237,6 +249,9 @@
             <div id="subTitle">Track Income & Control Expenses</div>
         </div>
         <div id="canvasBody" class="canvasBody">
+            <div class="noIncExpList">
+                No Income Or Expense Information Found
+            </div>
             <!--<div class="itemIE">
                 <div class="monthYearIE">April 2018</div>
 
