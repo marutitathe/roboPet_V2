@@ -124,10 +124,11 @@
         {
             var extraInfo = "";
 
-            var ddlCatType= document.getElementById("ddlCat");
+            var ddlCatType= document.getElementById("ddlCatType");
+
             var _Category = ddlCatType[ddlCatType.selectedIndex].value;
 
-            var _IECat = document.getElementById("txtCategory").value.toString().trim();
+            var _IECat = document.getElementById("txtCategory").value;
 
             if(_IECat.trim().length==0)
             {
@@ -137,6 +138,7 @@
             }
 
             var _IECatShort = document.getElementById("txtCatShort").value;
+
             if(_IECatShort.trim().length==0)
             {
                 alert("Category Short Text is Must.");
@@ -250,7 +252,7 @@
 
             <div id="newCategory">
                 <input id="txtCategory" type="text" name="category" autofocus="on" autocomplete="on" maxlength="50" placeholder="New Category"  />
-                <input id="txtCatShort" type="text" name="category" autofocus="on" autocomplete="on" maxlength="50" placeholder="Category Short Name"   />
+                <input id="txtCatShort" type="text" name="category" autofocus="on" autocomplete="on" maxlength="4" placeholder="Category Short Name"   />
                 <select id="ddlCatType">
                     <option value="0">Both</option>
                     <option value="1">Income</option>
