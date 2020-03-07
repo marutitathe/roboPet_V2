@@ -58,7 +58,7 @@
                 //logStep("3) Inserting Sample Data.", 0);
                 db.transaction(function (tx) {
                     logStep("Selectig rows from IECategories.", 0);
-                    tx.executeSql("SELECT id, CatName, catShortName, catType FROM IECategories ORDER BY CatName", [], function (rx, result) {
+                    tx.executeSql("SELECT id, catName, catShortName, catType FROM IECategories ORDER BY CatName", [], function (rx, result) {
                     
                         var rlen = result.rows.length;
                         var strBIE = "";
@@ -87,7 +87,7 @@
                                         strBIE = "EXPENSE";
                                     }
                                     strHTML = "     <div class=\"catLabel\">";
-                                    strHTML += "         "+result.rows.item(i).CatName+" <span>"+strBIE+"</span>"
+                                    strHTML += "         "+result.rows.item(i).catName+" <span>"+strBIE+"</span>"
                                     strHTML += "     </div>"
                                     strHTML += "     <div class=\"catDeleteButton\">"
                                     strHTML += "         <a href=\"#\" onclick=\"deleteCategory("+result.rows.item(i).id.toString().trim()+")\">X</a>"
