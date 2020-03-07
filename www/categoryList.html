@@ -153,6 +153,8 @@ function refillCatList(db)
                         tx.executeSql(strSQL);
                     }, errorSQL);
 
+                    refillCatList(db); 
+                    
                     var msgSuccess = "Category Deleted.";
                     showLongToastTop(msgSuccess);
 
