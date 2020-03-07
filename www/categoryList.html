@@ -56,61 +56,7 @@
                  
                 extraMsg = "Regill List";
                 //logStep("3) Inserting Sample Data.", 0);
-                db.transaction(function (tx) {
-                    logStep("Selectig rows from IECategories.", 0);
-                    tx.executeSql("SELECT id, catName, catShortName, catType FROM IECategories ORDER BY CatName", [], function (rx, result) {
-                    
-                        var rlen = result.rows.length;
-                        var strBIE = "";
-                        if(rlen==0)
-                        {
-                            showNoData();
-                        }
-                        else
-                        {
-                            try {
-                                logStep("Starting list creation.", 0);
-                                for (var i = 0; i <= rlen-1; i++) 
-                                {
-                                    //Category List Elements
-
-                                    if(result.rows.item(i).catType == 0)
-                                    {
-                                        strBIE = "BOTH";
-                                    }
-                                    else if(result.rows.item(i).catType == 1)
-                                    {
-                                        strBIE = "INCOME";
-                                    }
-                                    else
-                                    {
-                                        strBIE = "EXPENSE";
-                                    }
-                                    strHTML = "     <div class=\"catLabel\">";
-                                    strHTML += "         "+result.rows.item(i).catName+" <span>"+strBIE+"</span>"
-                                    strHTML += "     </div>"
-                                    strHTML += "     <div class=\"catDeleteButton\">"
-                                    strHTML += "         <a href=\"#\" onclick=\"deleteCategory("+result.rows.item(i).id.toString().trim()+")\">X</a>"
-                                    strHTML += "     </div>"
-
-                                    extraMsg = "Creating catItem div [" + result.rows.item(i).CatName + "]";
-                                    logStep("Row:" + i + " Category:" + result.rows.item(i).CatName,0);
-                                    var divMain = getDiv("catItem", "");
-
-                                    divMain.innerHTML = strHTML;
-
-                                    var divWrapper = document.getElementById("categoryList");
-
-                                    divWrapper.appendChild(divMain);
-                               
-                                }
-                             } catch (e) {
-                                alert(e.message + " ExtraMsg : " + extraMsg);
-                                logStep(e.message, 0);
-                            }
-                        }
-                    }, errorSQL);
-                }, errorSQL);
+                refillCatList(db);
 
                 var extraMsg = "";
             } catch (e) {
@@ -119,6 +65,105 @@
             }
         } 
         
+function refillCatList(db)
+    {
+        db.transaction(function (tx) {
+            logStep("Selectig rows from IECategories.", 0);
+            tx.executeSql("SELECT id, catName, catShortName, catType FROM IECategories ORDER BY CatName", [], function (rx, result) {
+            
+                var rlen = result.rows.length;
+                var strBIE = "";
+                if(rlen==0)
+                {
+                    showNoData();
+                }
+                else
+                {
+                    try {
+                        logStep("Starting list creation.", 0);
+                        for (var i = 0; i <= rlen-1; i++) 
+                        {
+                            //Category List Elements
+
+                            if(result.rows.item(i).catType == 0)
+                            {
+                                strBIE = "BOTH";
+                            }
+                            else if(result.rows.item(i).catType == 1)
+                            {
+                                strBIE = "INCOME";
+                            }
+                            else
+                            {
+                                strBIE = "EXPENSE";
+                            }
+                            strHTML = "     <div class=\"catLabel\">";
+                            strHTML += "         "+result.rows.item(i).catName+" <span>"+strBIE+"</span>"
+                            strHTML += "     </div>"
+                            strHTML += "     <div class=\"catDeleteButton\">"
+                            strHTML += "         <a href=\"#\" onclick=\"deleteCategory("+result.rows.item(i).id.toString().trim()+")\">X</a>"
+                            strHTML += "     </div>"
+
+                            extraMsg = "Creating catItem div [" + result.rows.item(i).CatName + "]";
+                            logStep("Row:" + i + " Category:" + result.rows.item(i).CatName,0);
+                            var divMain = getDiv("catItem", "");
+
+                            divMain.innerHTML = strHTML;
+
+                            var divWrapper = document.getElementById("categoryList");
+
+                            divWrapper.appendChild(divMain);
+                        
+                        }
+                        } catch (e) {
+                        alert(e.message + " ExtraMsg : " + extraMsg);
+                        logStep(e.message, 0);
+                    }
+                }
+            }, errorSQL);
+        }, errorSQL);    
+    }
+
+        function deleteCategory(catCode)
+        {
+            var extraInfo = "";
+
+            var db = null;
+            //Starg Saving Process As It Looks Ass OK
+            if(aalEejWel)
+            {
+                try {
+                    if (device.platform == "Android") {
+                        extraInfo = "Opening SQLite DB";
+                        db = window.sqlitePlugin.openDatabase({
+                            name: "roboPet.db", location: "default", androidDatabaseImplementation: 2
+                        });
+                    }
+                    else {
+                        extraInfo = "Opening WebSQL DB";
+                        db = window.openDatabase('roboPet.db', '1.0', 'roboPet Database', 2 * 1024 * 1024);
+                    }
+
+                    var strSQL = "DELETE FROM IECategories WHERE id="+catCode
+
+                    extraInfo = "Performing SQL: " + strSQL;
+                    db.transaction(function (tx) {
+                        tx.executeSql(strSQL);
+                    }, errorSQL);
+
+                    var msgSuccess = "Category Deleted.";
+                    showLongToastTop(msgSuccess);
+
+                } catch (e) {
+                    alert("ERROR: "+e.message)
+                    logStep(e.message, 0);
+                }
+            }
+            else
+            {
+                showLongToastTop("It Seems That Device Is Not Ready.");
+            }
+        }
 
         function saveCategory()
         {
@@ -252,7 +297,7 @@
 
             <div id="newCategory">
                 <input id="txtCategory" type="text" name="category" autofocus="on" autocomplete="on" maxlength="50" placeholder="New Category"  />
-                <input id="txtCatShort" type="text" name="category" autofocus="on" autocomplete="on" maxlength="4" placeholder="Category Short Name"   />
+                <input id="txtCatShort" type="text" name="category" autofocus="on" autocomplete="on" maxlength="4" size="4" placeholder="Category Short Name"   />
                 <select id="ddlCatType">
                     <option value="0">Both</option>
                     <option value="1">Income</option>
