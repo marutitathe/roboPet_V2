@@ -110,3 +110,46 @@ function errorSQL(err) {
 
     alert("ERROR: "+ err.message);
 }
+
+function showNoData()
+{
+    var vx  = document.getElementsByClassName("noIncExpList");
+
+    if(vx != null)
+    {
+        try
+        {
+            vx.style.display = "block";
+        }
+        catch(e)
+        {
+            alert(e.message);
+            logStep(e.message.trim(),0);
+        }
+    }
+}
+
+function showHideDiv(o)
+{
+    if(o==null || o=="undefined")
+    {
+        alert("Invalid object passed."+o.innerHTML );
+        return;
+    }
+
+    if(o.style.display=="none")
+    {
+        o.style.display="block";
+    }
+    else
+    {
+        o.style.display="none";
+    }
+
+}
+
+function deleteCategory(o)
+{
+    alert(o);
+    alert(o.value);
+}
