@@ -79,6 +79,9 @@ function refillCatList(db)
                 }
                 else
                 {
+                    var divWrapper = document.getElementById("categoryList");
+                    divWrapper.innerHTML = ""; //clearling the div
+
                     try {
                         logStep("Starting list creation.", 0);
                         for (var i = 0; i <= rlen-1; i++) 
@@ -110,7 +113,6 @@ function refillCatList(db)
 
                             divMain.innerHTML = strHTML;
 
-                            var divWrapper = document.getElementById("categoryList");
 
                             divWrapper.appendChild(divMain);
                         
@@ -213,6 +215,8 @@ function refillCatList(db)
                     db.transaction(function (tx) {
                         tx.executeSql(strSQL);
                     }, errorSQL);
+
+                    refillCatList(db); //Refilling The List
 
                     var msgSuccess = "Category Saved.";
                     showLongToastTop(msgSuccess);
