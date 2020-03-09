@@ -226,12 +226,9 @@ function refillCatList(db)
                     extraInfo = "Performing SQL: " + strSQL;
                     db.transaction(function (tx) {
                         tx.executeSql(strSQL);
-                    }, errorSQL);
+                    }, errorSQL, successCB);
 
                     refillCatList(db); //Refilling The List
-
-                    var msgSuccess = "Category Saved.";
-                    showLongToastTop(msgSuccess);
 
                 } catch (e) {
                     alert("ERROR: "+e.message)
@@ -259,9 +256,14 @@ function refillCatList(db)
             }
         }
 
-        function successSQL()
+        function successCB()
         {
-            logStep("Success");
+            //On Successful Saving Record; clear the form
+            document.getElementById("txtCategory").value ="";
+
+            document.getElementById("txtCatShort").value ="";
+
+            showLongToastTop("Category Saved.");
         }
 
     </script>
