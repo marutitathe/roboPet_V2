@@ -113,10 +113,12 @@ function refillCatList(db)
                             strHTML = "     <div class=\"catLabel\">";
                             strHTML += "         "+result.rows.item(i).catName+" <span>"+strBIE+"</span>"
                             strHTML += "     </div>"
-                            strHTML += "     <div class=\"catDeleteButton\">"
-                            strHTML += "         <a href=\"#\" onclick=\"deleteCategory("+result.rows.item(i).id.toString().trim()+")\">X</a>"
-                            strHTML += "     </div>"
-
+                            if(i>1) //Not Allowing User To Delete Default Records.
+                            {
+                                strHTML += "     <div class=\"catDeleteButton\">"
+                                strHTML += "         <a href=\"#\" onclick=\"deleteCategory("+result.rows.item(i).id.toString().trim()+")\">X</a>"
+                                strHTML += "     </div>"
+                            }
                             extraMsg = "Creating catItem div [" + result.rows.item(i).CatName + "]";
                             logStep("Row:" + i + " Category:" + result.rows.item(i).CatName,0);
                             var divMain = getDiv("catItem", "");
