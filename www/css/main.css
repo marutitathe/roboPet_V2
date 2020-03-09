@@ -219,7 +219,7 @@
     font-weight: bold;
 }
 
-.noDataMsgBox
+#noDataMsgBox
 {
     border: 2px solid lightgray;
     padding: 25px;

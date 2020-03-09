@@ -113,9 +113,7 @@ function errorSQL(err) {
 
 function showNoData(showHide)
 {
-    alert("Reached shoNoData");
-
-    var vx  = document.getElementsByClassName("noDataMsgBox");
+    var vx  = document.getElementById("noDataMsgBox");
     
     showHideDiv(vx, showHide);
 }
