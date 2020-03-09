@@ -226,7 +226,7 @@ function refillCatList(db)
                     extraInfo = "Performing SQL: " + strSQL;
                     db.transaction(function (tx) {
                         tx.executeSql(strSQL);
-                    }, errorSQL, successCB);
+                    }, errorCB, successCB);
 
                     refillCatList(db); //Refilling The List
 
@@ -242,17 +242,24 @@ function refillCatList(db)
             
         }        
 
-        function errorSQL(err)
+        function errorCB(err)
         {
+            if (typeof String.prototype.indexOf != "undefined") { 
             
-            //Checking For Unique Key Error
-            if(err.indexOf("code 2067")>-1 || err.indexOf("Error Code : 2027")>-1 || err.indexOf("SQLITE_CONSTRAINT_UNIQUE")>-1) 
-            {
-                alert("Category Name or Category Short Name Already Defined. You Must Define Unique Names.");
+                //Checking For Unique Key Error
+                if(err.indexOf("code 2067")>-1 || err.indexOf("Error Code : 2027")>-1 || err.indexOf("SQLITE_CONSTRAINT_UNIQUE")>-1) 
+                {
+                    alert("Category Name or Category Short Name Already Defined. You Must Define Unique Names.");
+                }
+                else
+                {
+                    alert(err);
+                }
+
             }
             else
             {
-                alert(err);
+                alert("INDEX OF IS NOT SUPPORTED "+err);
             }
         }
 
@@ -263,7 +270,7 @@ function refillCatList(db)
 
             document.getElementById("txtCatShort").value ="";
 
-            showLongToastTop("Category Saved.");
+            showLongToastTop("New Category Saved.");
         }
 
     </script>
