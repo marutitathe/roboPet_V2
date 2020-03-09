@@ -246,10 +246,15 @@ function refillCatList(db)
         {
             // if (typeof String.prototype.indexOf != "undefined") { 
             // }
-            alert(err.code);
-            alert(err.errorCode);
+            err = err.toString();
+
+            alert(err);
+            alert(err);
             alert(err);
 
+            err = err.replace("#", "");
+            alert(err);
+            
                 //Checking For Unique Key Error
                 if(err.indexOf("code 2067")>-1 || err.indexOf("Error Code : 2027")>-1 || err.indexOf("SQLITE_CONSTRAINT_UNIQUE")>-1) 
                 {
