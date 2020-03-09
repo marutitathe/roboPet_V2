@@ -244,8 +244,12 @@ function refillCatList(db)
 
         function errorCB(err)
         {
-            if (typeof String.prototype.indexOf != "undefined") { 
-            
+            // if (typeof String.prototype.indexOf != "undefined") { 
+            // }
+            alert(err.code);
+            alert(err.errorCode);
+            alert(err);
+
                 //Checking For Unique Key Error
                 if(err.indexOf("code 2067")>-1 || err.indexOf("Error Code : 2027")>-1 || err.indexOf("SQLITE_CONSTRAINT_UNIQUE")>-1) 
                 {
@@ -256,11 +260,6 @@ function refillCatList(db)
                     alert(err);
                 }
 
-            }
-            else
-            {
-                alert("INDEX OF IS NOT SUPPORTED "+err);
-            }
         }
 
         function successCB()
