@@ -236,7 +236,15 @@ function refillCatList(db)
 
         function errorSQL(err)
         {
-            alert(err);
+            //Checking For Unique Key Error
+            if(err.includes("code 2067") || err.includes("Error Code : 2027") || err.includes("SQLITE_CONSTRAINT_UNIQUE")) 
+            {
+                alert("Category Name or Category Short Name Already Defined. You Must Define Unique Names.");
+            }
+            else
+            {
+                alert(err);
+            }
         }
 
         function successSQL()
