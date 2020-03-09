@@ -117,35 +117,12 @@ function showNoData(showHide)
 
     var vx  = document.getElementsByClassName("noDataMsgBox");
     
-    alert("VX is"+vx);
-    
-    if(vx == null || vx=="undefined")
-    {
-        alert("Could not find the required MessageBox for NoData");
-        return;
-    }
-    try
-    {
-        alert(vx);
-        if(showHide==1)
-        {
-            vx.style.display = "block";
-        }
-        else
-        {
-            vx.style.display = "none";
-        }
-    }
-    catch(e)
-    {
-        alert(e.message);
-        logStep(e.message.trim(),0);
-    }
+    showHideDiv(vx, showHide);
 }
 
 function showHideDiv(o, showHide)
 {
-    if(o==null || o=="undefined")
+    if(o==null || o=="undefined" || o==undefined)
     {
         alert("Invalid object passed."+o.innerHTML );
         return;

@@ -90,9 +90,11 @@
 
                         if (rlen == 0) 
                         {
-                            showNoData();
+                            showNoData(1);
                             return; //No Rows To Execute;
                         }
+
+                        showNoData(0);
                         try {
                             logStep("Starting list creation.", 0);
                             for (var i = 0; i <= rlen-1; i++) {
@@ -221,7 +223,7 @@
             } catch (e) {
                 alert(e.message);
                 logStep(e.message.trim(),0);
-                showNoData();
+                showNoData(1);
             }
         }
 

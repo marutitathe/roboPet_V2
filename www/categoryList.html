@@ -75,10 +75,11 @@ function refillCatList(db)
                 var strBIE = "";
                 if(rlen==0)
                 {
-                    showNoData();
+                    showNoData(1);
                 }
                 else
                 {
+                    showNoData(0); //Hide
                     var divWrapper = document.getElementById("categoryList");
                     divWrapper.innerHTML = ""; //clearling the div
 
