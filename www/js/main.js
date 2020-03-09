@@ -126,7 +126,7 @@ function showNoData(showHide)
     {
         showHide=1;
     }
-    showHide(vx,showHide);
+    showHideDiv(vx,showHide);
 }
 
 function showHideDiv(o, showHide)
