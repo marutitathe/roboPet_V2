@@ -77,8 +77,7 @@ function refillCatList(db)
                 if(rlen==0)
                 {
                     //showNoData(1); -- If there are zero records then add GENERAL category to the database.
-                    var strSQL = "INSERT INTO IECategories(catName, catShortName, catType) VALUES('GENERAL', 'GNR', 0); "
-                        strSQL += "INSERT INTO IECategories(catName, catShortName, catType) VALUES('UBER EXPENSE', 'UBRX', 0); "
+                    var strSQL = "INSERT INTO IECategories(catName, catShortName, catType) VALUES('GENERAL', 'GNR', 0),('UBER EXPENSE', 'UBRX', 2); ";
 
                     db.transaction(function (tx) {
                         tx.executeSql(strSQL);
