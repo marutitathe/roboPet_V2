@@ -113,7 +113,11 @@ function errorSQL(err) {
 
 function showNoData(showHide)
 {
+    alert("Reached shoNoData");
+
     var vx  = document.getElementsByClassName("noDataMsgBox");
+    
+    alert("VX is"+vx);
     
     if(vx == null || vx=="undefined")
     {
