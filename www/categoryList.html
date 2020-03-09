@@ -52,6 +52,7 @@
                     //tx.executeSql("DROP TABLE IF EXISTS IncExp");
                     //catType=0 (Both), catType=1 (Income), catType=2 (Expense)
                     tx.executeSql("CREATE TABLE IF NOT EXISTS IECategories(id integer primary key autoincrement, catName text unique, catShortName text unique, catType integer)");
+                    
                 }, errorSQL);
                  
                 extraMsg = "Regill List";
@@ -75,7 +76,16 @@ function refillCatList(db)
                 var strBIE = "";
                 if(rlen==0)
                 {
-                    showNoData(1);
+                    //showNoData(1); -- If there are zero records then add GENERAL category to the database.
+                    var strSQL = "INSERT INTO IECategories(catName, catShortName, catType) VALUES('GENERAL', 'GNR', 0); "
+                        strSQL += "INSERT INTO IECategories(catName, catShortName, catType) VALUES('UBER EXPENSE', 'UBRX', 0); "
+
+                    db.transaction(function (tx) {
+                        tx.executeSql(strSQL);
+                    }, errorSQL);
+
+                    refillCatList(db);
+
                 }
                 else
                 {
