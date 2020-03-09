@@ -111,15 +111,22 @@ function errorSQL(err) {
     alert("ERROR: "+ err.message);
 }
 
-function showNoData()
+function showNoData(showHide)
 {
     var vx  = document.getElementsByClassName("noDataMsgBox");
-
-    if(vx != null)
+    
+    if(vx != null && vx!="undefined")
     {
         try
         {
-            vx.style.display = "block";
+            if(showHide==1)
+            {
+                vx.style.display = "block";
+            }
+            else
+            {
+                vx.style.display = "none";
+            }
         }
         catch(e)
         {
