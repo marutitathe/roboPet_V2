@@ -113,7 +113,7 @@ function errorSQL(err) {
 
 function showNoData()
 {
-    var vx  = document.getElementsByClassName("noIncExpList");
+    var vx  = document.getElementsByClassName("noDataMsgBox");
 
     if(vx != null)
     {
@@ -129,7 +129,7 @@ function showNoData()
     }
 }
 
-function showHideDiv(o)
+function showHideDiv(o, showHide)
 {
     if(o==null || o=="undefined")
     {
@@ -137,7 +137,8 @@ function showHideDiv(o)
         return;
     }
 
-    if(o.style.display=="none")
+
+    if(showHide==1)
     {
         o.style.display="block";
     }

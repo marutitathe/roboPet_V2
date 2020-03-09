@@ -24,3 +24,10 @@ button
     font-weight: bold;
     color: darkgreen;
 }
+
+.catLabel span
+{
+    color:#216421;
+    font-size: small;
+    font-weight: bold;
+}

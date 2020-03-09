@@ -219,7 +219,7 @@
     font-weight: bold;
 }
 
-.noIncExpList
+.noDataMsgBox
 {
     border: 2px solid lightgray;
     padding: 25px;
@@ -231,4 +231,9 @@
     color: gray;
     background: whitesmoke;
     display: none;
+}
+
+.onlyUppercase
+{
+    text-transform: uppercase;
 }

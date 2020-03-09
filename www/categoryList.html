@@ -112,8 +112,6 @@ function refillCatList(db)
                             var divMain = getDiv("catItem", "");
 
                             divMain.innerHTML = strHTML;
-
-
                             divWrapper.appendChild(divMain);
                         
                         }
@@ -242,6 +240,11 @@ function refillCatList(db)
 
     </script>
     <style>
+        #newCategory
+        {
+            display: none;
+        }
+
         #categoryList .catItem
         {
             display: -webkit-box;           
@@ -255,6 +258,8 @@ function refillCatList(db)
             padding:10px;
 
             width: 93%;
+
+            background-color: #EDF0ED;
         }
         #categoryList .catItem .catLabel
         {
@@ -272,7 +277,6 @@ function refillCatList(db)
         #categoryList .catItem a
         {
             font-style:normal;
-            border:1px solid red;
             padding:7px;
             color:red;
             text-decoration:none;
@@ -282,6 +286,8 @@ function refillCatList(db)
         #categoryList .catItem a:hover
         {
             cursor: pointer;
+            border: 1px solid red;
+            border-radius: 50%;
         }
 
 
@@ -297,19 +303,19 @@ function refillCatList(db)
         </div>
 
         <div id="canvasBody" class="canvasBody">
-            <div class="noIncExpList">
+            <div class="noDataMsgBox">
                 No Category Defined Yet.
             </div>
 
             <div id="newCategory">
-                <input id="txtCategory" type="text" name="category" autofocus="on" autocomplete="on" maxlength="50" placeholder="New Category"  />
-                <input id="txtCatShort" type="text" name="category" autofocus="on" autocomplete="on" maxlength="4" size="4" placeholder="Category Short Name"   />
+                <input id="txtCategory" class="onlyUppercase" type="text" name="category" autofocus="on" autocomplete="on" maxlength="50" placeholder="New Category"  />
+                <input id="txtCatShort" class="onlyUppercase" type="text" name="category" autofocus="on" autocomplete="on" maxlength="4" size="4" placeholder="Category Short Name"   />
                 <select id="ddlCatType">
                     <option value="0">Both</option>
                     <option value="1">Income</option>
                     <option value="2">Expense</option>
                 </select>
-                <button type="button" id="btnClose" onclick="showHideDiv(this.parentElement);">Cancel</input>
+                <button type="button" id="btnClose" onclick="showHideDiv(this.parentElement,0);">Cancel</input>
                 <button type="button" id="btnSave" onclick="saveCategory();">Save</input>
             </div>
             <div id="categoryList">
@@ -343,7 +349,7 @@ function refillCatList(db)
         <div style="clear:both"></div>
         <div class="canvasFooter"></div>
     </div>
-    <div class="roundButton" onclick="javascript:var v=document.getElementById('newCategory'); showHideDiv(v);">
+    <div class="roundButton" onclick="javascript:var v=document.getElementById('newCategory'); showHideDiv(v,1);">
         +
     </div>
     <script>
