@@ -51,7 +51,7 @@
                 db.transaction(function (tx) { 
                     //tx.executeSql("DROP TABLE IF EXISTS IncExp");
                     //catType=0 (Both), catType=1 (Income), catType=2 (Expense)
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS IECategories(id integer primary key autoincrement, catName text, catShortName text, catType integer)");
+                    tx.executeSql("CREATE TABLE IF NOT EXISTS IECategories(id integer primary key autoincrement, catName text unique, catShortName text unique, catType integer)");
                 }, errorSQL);
                  
                 extraMsg = "Regill List";
@@ -80,7 +80,7 @@ function refillCatList(db)
                 else
                 {
                     showNoData(0); //Hide
-                    var divWrapper = document.getElementById("categoryList");
+                    var divWrapper = document.getElementById("dataItemList");
                     divWrapper.innerHTML = ""; //clearling the div
 
                     try {
@@ -234,6 +234,11 @@ function refillCatList(db)
             
         }        
 
+        function errorSQL(err)
+        {
+            alert(err);
+        }
+
         function successSQL()
         {
             logStep("Success");
@@ -246,7 +251,7 @@ function refillCatList(db)
             display: none;
         }
 
-        #categoryList .catItem
+        #dataItemList .catItem
         {
             display: -webkit-box;           
             display: -moz-box;         
@@ -262,7 +267,7 @@ function refillCatList(db)
 
             background-color: #EDF0ED;
         }
-        #categoryList .catItem .catLabel
+        #dataItemList .catItem .catLabel
         {
             width: 95%;
             padding: 2px;
@@ -270,12 +275,12 @@ function refillCatList(db)
 
         }
 
-        #categoryList .catItem .catDeleteButton
+        #dataItemList .catItem .catDeleteButton
         {
             float:right;
         }
 
-        #categoryList .catItem a
+        #dataItemList .catItem a
         {
             font-style:normal;
             padding:7px;
@@ -284,7 +289,7 @@ function refillCatList(db)
             font-weight:bold;
         }
 
-        #categoryList .catItem a:hover
+        #dataItemList .catItem a:hover
         {
             cursor: pointer;
             border: 1px solid red;
@@ -319,7 +324,7 @@ function refillCatList(db)
                 <button type="button" id="btnClose" onclick="showHideDiv(this.parentElement,0);">Cancel</input>
                 <button type="button" id="btnSave" onclick="saveCategory();">Save</input>
             </div>
-            <div id="categoryList">
+            <div id="dataItemList">
                 <div class="catItem">
                     <div class="catLabel">
                         Test Entry 1 <span>BOTH</span> 

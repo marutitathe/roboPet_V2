@@ -116,6 +116,17 @@ function showNoData(showHide)
     var vx  = document.getElementById("noDataMsgBox");
     
     showHideDiv(vx, showHide);
+
+    vx = document.getElementById("dataItemList");
+    if(showHide==1)
+    {
+        showHide=0;
+    }
+    else
+    {
+        showHide=1;
+    }
+    showHide(vx,showHide);
 }
 
 function showHideDiv(o, showHide)
