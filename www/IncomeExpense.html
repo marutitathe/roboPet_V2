@@ -186,35 +186,35 @@
                         alert("Could not open database to fill category ddl.");
                         return;
                     }
-
-                    db.executeSql(strSQL, [], function (rx, result){
-                        if(results.rows.length==0)
-                        {
-                            alert("No "+strIncExp+" Category Defined");
-                            return;
-                        }
-                        else
-                        {
-                            //Empty The Category Drop Down List
-                            var ddl = document.getElementById("ddlCat");
-                            var length = ddl.options.length;
-                            for (i = length-1; i >= 0; i--) {
-                                ddl.remove(i);
-                            }
-
-                            //Filling the DDL with required category type (Income / Expense)
-                            for(i=0;i<=result.rows.length-1;i++)
+                    db.transaction(function (tx) {
+                        tx.executeSql(strSQL, [], function (rx, result){
+                            if(results.rows.length==0)
                             {
-                                var opt = document.createElement("option");
-                                opt.value= i;
-                                opt.innerHTML = result.rows.item(i).CatName;
-
-                                ddl.appendChild(opt);                                
+                                alert("No "+strIncExp+" Category Defined");
+                                return;
                             }
-                        }
+                            else
+                            {
+                                //Empty The Category Drop Down List
+                                var ddl = document.getElementById("ddlCat");
+                                var length = ddl.options.length;
+                                for (i = length-1; i >= 0; i--) {
+                                    ddl.remove(i);
+                                }
 
+                                //Filling the DDL with required category type (Income / Expense)
+                                for(i=0;i<=result.rows.length-1;i++)
+                                {
+                                    var opt = document.createElement("option");
+                                    opt.value= i;
+                                    opt.innerHTML = result.rows.item(i).CatName;
+
+                                    ddl.appendChild(opt);                                
+                                }
+                            }
+
+                        },errorCBCats);
                     },errorCBCats);
-
 
                 } catch (e) {
                     alert("ERROR: "+e.message)
