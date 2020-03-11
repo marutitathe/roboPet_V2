@@ -146,14 +146,16 @@
 
         function fillIncomeCats()
         {
-            refillCategories("select id, catName WHERE catType=0 or catType=1 order by catName",1);
+            var strS = "select id, catName WHERE catType=0 or catType=1 order by catName";
+            refillCategories(strS,1);
         }        
         function fillExpenseCats()
         {
-            refillCategories("select id, catName WHERE catType=0 or catType=2 order by catName",2);
+            var strS ="select id, catName WHERE catType=0 or catType=2 order by catName";
+            refillCategories(strS,2);
         }
 
-        function refillCategories(strSQL,catIncExp)
+        function refillCategories(strSQL, catIncExp)
         {
             var extraInfo = "";
 

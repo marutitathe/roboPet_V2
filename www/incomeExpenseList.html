@@ -80,7 +80,8 @@
 
                         var rlen = result.rows.length;
                         logStep("Total ["+rlen+"] records found in IncomeExpense");
-                        var canvasBody = document.getElementById("canvasBody");
+                        //var canvasBody = document.getElementById("canvasBody");
+                        var canvasBody = document.getElementById("dataItemList");
                         var divItemIE;
                         var addElementsToDabba = 0;
                         var NewBoxNeeded = 1;
@@ -248,6 +249,9 @@
         <div id="canvasBody" class="canvasBody">
             <div id="noDataMsgBox">
                 No Income Or Expense Information Found
+            </div>
+            <div id="dataItemList">
+
             </div>
             <!--<div class="itemIE">
                 <div class="monthYearIE">April 2018</div>
