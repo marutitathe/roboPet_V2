@@ -187,8 +187,21 @@
                         return;
                     }
                     db.transaction(function (tx) {
+
+                        //Checking if the table exists
+                        tx.executeSql("SELECT COUNT(*) as tblCount FROM sqlite_master WHERE type='table' and name='IECategories'", [], function (rx, result){
+
+                            if(result.rows.item(0).tblCount==0)
+                            {
+                                alert("Categories not defined yet. Please create categories from setup first.")
+                                return;
+                            }
+
+                        },errorCBCats);
+
+                        //Table already exists so start filling ddl
                         tx.executeSql(strSQL, [], function (rx, result){
-                            if(results.rows.length==0)
+                            if(result.rows.length==0)
                             {
                                 alert("No "+strIncExp+" Category Defined");
                                 return;
