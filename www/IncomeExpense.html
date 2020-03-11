@@ -186,8 +186,8 @@
                         alert("Could not open database to fill category ddl.");
                         return;
                     }
-                    //db.transaction(function (tx) {
-                        db.executeSql(strSQL, [], function (rx, result){
+                    db.transaction(function (tx) {
+                        tx.executeSql(strSQL, [], function (rx, result){
                             if(results.rows.length==0)
                             {
                                 alert("No "+strIncExp+" Category Defined");
@@ -206,7 +206,7 @@
                                 for(i=0;i<=result.rows.length-1;i++)
                                 {
                                     var opt = document.createElement("option");
-                                    opt.value= i;
+                                    opt.value= result.rows.item(i).id;
                                     opt.innerHTML = result.rows.item(i).CatName;
 
                                     ddl.appendChild(opt);                                
@@ -214,7 +214,7 @@
                             }
 
                         },errorCBCats);
-                    //},errorCBCats);
+                    },errorCBCats);
 
                 } catch (e) {
                     alert("ERROR: "+e.message)
