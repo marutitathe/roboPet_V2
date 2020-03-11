@@ -104,15 +104,21 @@
         function showIncExpBox(incOrExp)
         {
             t = document.getElementById("incExpTitle")
+            // t.classList.remove("expenseTitle");
+            // t.classList.remove("incomeTitle");
+
             if (incOrExp == 1)
             {
                 t.innerText = "Income Entry";
+                t.className= "incomeExpsenseTitle incomeTitle";
                 fillIncomeCats();
                 incExp = 1;
             }
             else
             {
                 t.innerHTML = "Expense Entry";
+                t.className= "incomeExpsenseTitle expenseTitle";
+
                 fillExpenseCats();
                 incExp=0;
             }
@@ -136,15 +142,101 @@
             m.style.display = "block"; //Hide current menu to show entry box.
         }
 
+        //Section to fill dropDownList for income or expense categories <<SectionFillIECats>>
+
         function fillIncomeCats()
         {
-
-        }
-
+            refillCategories("select id, catName WHERE catType=0 or catType=1 order by catName",1);
+        }        
         function fillExpenseCats()
         {
+            refillCategories("select id, catName WHERE catType=0 or catType=2 order by catName",2);
+        }
+
+        function refillCategories(strSQL,catIncExp)
+        {
+            var extraInfo = "";
+
+            var strIncExp = "Expense";
+
+            if(catIncExp==1)
+            {
+                strIncExp="Income";
+            }
+            var db = null;
+            //Starg Saving Process As It Looks Ass OK
+            if(aalEejWel)
+            {
+                try {
+                    if (device.platform == "Android") {
+                        extraInfo = "Opening SQLite DB";
+                        db = window.sqlitePlugin.openDatabase({
+                            name: "roboPet.db", location: "default", androidDatabaseImplementation: 2
+                        });
+                    }
+                    else {
+                        extraInfo = "Opening WebSQL DB";
+                        db = window.openDatabase('roboPet.db', '1.0', 'roboPet Database', 2 * 1024 * 1024);
+                    }
+
+                    if(db==null)
+                    {
+                        alert("Could not open database to fill category ddl.");
+                        return;
+                    }
+
+
+                    db.executeSql(strsql,[],function (rx, result){
+                        if(results.rows.length==0)
+                        {
+                            alert("No "+strIncExp+" Category Defined");
+                            return;
+                        }
+                        else
+                        {
+                            //Empty The Category Drop Down List
+                            var ddl = document.getElementById("ddlCat");
+                            var length = ddl.options.length;
+                            for (i = length-1; i >= 0; i--) {
+                                ddl.remove(i);
+                            }
+
+                            //Filling the DDL with required category type (Income / Expense)
+                            for(i=0;i<=result.rows.length-1;i++)
+                            {
+                                var opt = document.createElement("option");
+                                opt.value= i;
+                                opt.innerHTML = result.rows.item(i).CatName;
+
+                                ddl.appendChild(opt);                                
+                            }
+                        }
+
+                    },errorCBCats);
+
+
+                } catch (e) {
+                    alert("ERROR: "+e.message)
+                    logStep(e.message, 0);
+                }
+            }
+            else
+            {
+                showLongToastTop("It Seems That Device Is Not Ready.");
+            }
+        }
+
+        function errorCBCats(err)
+        {
+            err = err.toString();
+
+            alert("ERROR WHILE FILLING CATEGORIES"+err);
 
         }
+
+        //<<SectionFillIECats>> Ends Here
+
+
 
         function saveIncExp()
         {
@@ -257,25 +349,26 @@
                 </div>
             </div>
             <form action="#">
-                <div id="incExpBox" class="IncExp" style="display:none;margin:20px;">
+                <div id="incExpBox" style="display:none">
                     <p id="incExpTitle">Income Entry</p>
-                    <br />
                     <!--<input type="date" id="entryDate" contenteditable="true" placeholder="Entry Date" class="genInput" />-->
                     <!--<input type="date" id="entryDate" contenteditable="true" placeholder="Entry Date" class="genInput" onfocus="calendar(this);" onkeydown="return false;" />-->
                     <!-- Adding OnFocus and OnKeyDown events to this control if it is not browser (so that Android and iOS can show native datePicker) -->
-                    <input type="date" id="entryDate" contenteditable="true" placeholder="Entry Date" class="genInput" dateValue="" />
-                    <select id="ddlCat" class="ddlCat genInput">
-                        <option value="1">General Exp</option>
-                        <option value="2">MSEB Exp</option>
-                    </select>
-                    <textarea id="txtDetails" placeholder="Expense Details" rows="3" class="genInput"></textarea>
-                    <input id="txtAmount" type="number" value="0.00" class="genInput" onfocus="this.select(); this.setSelectionRange(0, this.value.length);" />
+                    <div id="mainForm"> 
+                        <input type="date" id="entryDate" contenteditable="true" placeholder="Entry Date" class="genInput" dateValue="" />
+                        <select id="ddlCat" class="ddlCat genInput">
+                            <option value="1">General Exp</option>
+                            <option value="2">MSEB Exp</option>
+                        </select>
+                        <textarea id="txtDetails" placeholder="Expense Details" rows="3" class="genInput"></textarea>
+                        <input id="txtAmount" type="number" value="0.00" class="genInput" onfocus="this.select(); this.setSelectionRange(0, this.value.length);" />
+                        <br/>
 
-                    <div class="actionButtons">
-                        <input id="btnBack" type="button" value="Back" onclick="goBack();" />
-                        <input id="btnSave" type="button" value="Save" onclick="saveIncExp();" />
+                        <div class="actionButtons">
+                            <button id="btnClose" type="button" onclick="goBack();">Back</button>
+                            <button id="btnSave" type="button"  onclick="saveIncExp();">Save</button>
+                        </div>
                     </div>
-
                     <p id="deviceProperties">Loading device properties...</p>
 
                 </div>

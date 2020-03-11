@@ -108,25 +108,36 @@
         font-size: 15px;
     }
 
-.actionButtons input {
-    height: 30px;
-    width: 55%;
-    margin: 0px;
-    padding: 0px;
+button
+{
+    padding: 5px;
+    font-size: 17px;    
 }
 
-.actionButtons #btnBack {
-    width: 43% !important;
+#btnClose
+{
+    margin: 10px 0px 10px 15px;
+    width:35% !important;;
+    color:red;
 }
+#btnSave
+{
+    margin: 10px 0px 10px 5px;
+    width: 45%;
+    font-weight: bold;
+    color: darkgreen;
+}
+
 
 .genInput {
     /*Usually different input controls like TextArea, Select, Input etc have different input widths; to make it uniform following 3 lines are must.*/
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    width: 100%;
+    width: 95%;
     padding: 7px;
     margin: 5px;
+    font-size:18px;
 }
 
 .roundButton {
@@ -236,4 +247,30 @@
 .onlyUppercase
 {
     text-transform: uppercase;
+}
+
+
+.incomeExpsenseTitle
+{
+    font-size: 21px;
+    padding: 5px;
+}
+.expenseTitle
+{
+    color: #9F0909;
+    background-color: #FCE1E1;
+}
+
+.incomeTitle
+{
+    color: #1A4D43;
+    background-color: #97EAB7;    
+    width:100%;
+    padding:5px 10px;
+
+}
+
+#mainForm
+{
+    margin: 3px 7px;    
 }
