@@ -187,7 +187,6 @@
                         return;
                     }
 
-
                     db.executeSql(strSQL, [], function (rx, result){
                         if(results.rows.length==0)
                         {
@@ -232,7 +231,7 @@
         {
             err = err.toString();
 
-            alert("ERROR WHILE FILLING CATEGORIES"+err);
+            alert("ERROR WHILE REFILL CATEGORY QUERY"+err);
 
         }
 
