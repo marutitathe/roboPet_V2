@@ -186,7 +186,7 @@
                     //     alert("Could not open database to fill category ddl.");
                     //     return;
                     // }
-                    db = openDatabase(db);
+                    db = openSQLiteDatabase(db);
 
                     db.transaction(function (tx) {
 
@@ -311,7 +311,7 @@
                     //     extraInfo = "Opening WebSQL DB";
                     //     db = window.openDatabase('roboPet.db', '1.0', 'roboPet Database', 2 * 1024 * 1024);
                     // }
-                    db = openDatabase(db);
+                    db = openSQLiteDatabase(db);
 
                     var strSQL = "INSERT INTO IncExp(IncExp, IEDate, Category, IEDetail, Amount) VALUES(" + incExp + ", " + _IEDate + ", " + _Category + ", '" + _IEDetail + "', " + _Amount + ")"
 

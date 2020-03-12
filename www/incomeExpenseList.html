@@ -35,16 +35,19 @@
 
                 
 
-                if (device.platform == "Android") {
-                    logStep("1) Creting (Or Opening) SQLite DB",0)
-                    db = window.sqlitePlugin.openDatabase({
-                        name: "roboPet.db", location: "default", androidDatabaseImplementation: 2
-                    });
-                }
-                else {
-                    logStep("1) Creting (Or Opening) WebSQL DB",0)
-                    db = window.openDatabase('roboPet.db', '1.0', 'roboPet Database', 2 * 1024 * 1024);
-                }
+                // if (device.platform == "Android") {
+                //     logStep("1) Creting (Or Opening) SQLite DB",0)
+                //     db = window.sqlitePlugin.openDatabase({
+                //         name: "roboPet.db", location: "default", androidDatabaseImplementation: 2
+                //     });
+                // }
+                // else {
+                //     logStep("1) Creting (Or Opening) WebSQL DB",0)
+                //     db = window.openDatabase('roboPet.db', '1.0', 'roboPet Database', 2 * 1024 * 1024);
+                // }
+
+                db = openSQLiteDatabase(db);
+                
 
                 logStep("2) Creating Tables If Not Present.", 0);
                 db.transaction(function (tx) { 
