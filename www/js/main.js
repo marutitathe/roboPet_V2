@@ -1,6 +1,39 @@
 var screenHeight = 0;
 var screenWidth = 0;
 var canvas;
+
+//Database Related Functions
+function openSQLiteDatabase(db)
+{
+    var extraInfo="";
+    try
+    {
+        if (device.platform == "Android") {
+            extraInfo = "Opening SQLite DB";
+            logStep(extraInfo, 0);
+            db = window.sqlitePlugin.openDatabase({
+                name: "roboPet.db", location: "default", androidDatabaseImplementation: 2
+            });
+        }
+        else {
+            extraInfo = "Opening WebSQL DB";
+            logStep(extraInfo, 0);
+            db = window.openDatabase('roboPet.db', '1.0', 'roboPet Database', 2 * 1024 * 1024);
+        }
+    }
+    catch(e)
+    {
+        alert("Error While : "+extraInfo);
+    }
+
+    if(db==null)
+    {
+        alert("Could not open database");
+        return null;
+    }
+    return db;
+}
+
 function getsetScreenSize() {
     screenWidth = window.screen.width;
     screenHeight = window.screen.height;
