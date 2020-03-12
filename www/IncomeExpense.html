@@ -170,26 +170,28 @@
             if(aalEejWel)
             {
                 try {
-                    if (device.platform == "Android") {
-                        extraInfo = "Opening SQLite DB";
-                        db = window.sqlitePlugin.openDatabase({
-                            name: "roboPet.db", location: "default", androidDatabaseImplementation: 2
-                        });
-                    }
-                    else {
-                        extraInfo = "Opening WebSQL DB";
-                        db = window.openDatabase('roboPet.db', '1.0', 'roboPet Database', 2 * 1024 * 1024);
-                    }
+                    // if (device.platform == "Android") {
+                    //     extraInfo = "Opening SQLite DB";
+                    //     db = window.sqlitePlugin.openDatabase({
+                    //         name: "roboPet.db", location: "default", androidDatabaseImplementation: 2
+                    //     });
+                    // }
+                    // else {
+                    //     extraInfo = "Opening WebSQL DB";
+                    //     db = window.openDatabase('roboPet.db', '1.0', 'roboPet Database', 2 * 1024 * 1024);
+                    // }
 
-                    if(db==null)
-                    {
-                        alert("Could not open database to fill category ddl.");
-                        return;
-                    }
+                    // if(db==null)
+                    // {
+                    //     alert("Could not open database to fill category ddl.");
+                    //     return;
+                    // }
+                    db = openDatabase(db);
+
                     db.transaction(function (tx) {
 
                         //Checking if the table exists
-                        tx.executeSql("SELECT COUNT(*) as tblCount FROM sqlite_master WHERE type='table' and name='IECategories'", [], function (rx, result){
+                        tx.executeSql("SELECT COUNT(*) as tblCount FROM sqlite_master WHERE type='table' and tbl_name='IECategories'", [], function (rx, result){
 
                             if(result.rows.item(0).tblCount==0)
                             {
@@ -220,7 +222,7 @@
                                 {
                                     var opt = document.createElement("option");
                                     opt.value= result.rows.item(i).id;
-                                    opt.innerHTML = result.rows.item(i).CatName;
+                                    opt.innerHTML = result.rows.item(i).catName;
 
                                     ddl.appendChild(opt);                                
                                 }
@@ -299,16 +301,17 @@
             if(aalEejWel)
             {
                 try {
-                    if (device.platform == "Android") {
-                        extraInfo = "Opening SQLite DB";
-                        db = window.sqlitePlugin.openDatabase({
-                            name: "roboPet.db", location: "default", androidDatabaseImplementation: 2
-                        });
-                    }
-                    else {
-                        extraInfo = "Opening WebSQL DB";
-                        db = window.openDatabase('roboPet.db', '1.0', 'roboPet Database', 2 * 1024 * 1024);
-                    }
+                    // if (device.platform == "Android") {
+                    //     extraInfo = "Opening SQLite DB";
+                    //     db = window.sqlitePlugin.openDatabase({
+                    //         name: "roboPet.db", location: "default", androidDatabaseImplementation: 2
+                    //     });
+                    // }
+                    // else {
+                    //     extraInfo = "Opening WebSQL DB";
+                    //     db = window.openDatabase('roboPet.db', '1.0', 'roboPet Database', 2 * 1024 * 1024);
+                    // }
+                    db = openDatabase(db);
 
                     var strSQL = "INSERT INTO IncExp(IncExp, IEDate, Category, IEDetail, Amount) VALUES(" + incExp + ", " + _IEDate + ", " + _Category + ", '" + _IEDetail + "', " + _Amount + ")"
 
@@ -336,10 +339,6 @@
             }
             
         }
-
-
-
-
 
         
     </script>
