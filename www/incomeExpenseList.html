@@ -77,9 +77,17 @@
 
                 var extraMsg = "";
 
+                var strSQL = "";
+
+
                 db.transaction(function (tx) {
                     logStep("Selectig rows from IncomeExpense.", 0);
-                    tx.executeSql("SELECT id, IncExp, IEDate, Category, IEDetail, Amount FROM IncExp ORDER BY IEDate DESC", [], function (rx, result) {
+
+                    strSQL = "SELECT IE.id, IE.IncExp, IE.IEDate, IEC.catName as categoryName, IE.IEDetail, IE.Amount "+
+                             "FROM IncExp as IE "+
+                             "LEFT JOIN IECategories as IEC ON IE.Category=IEC.id "
+                             "ORDER BY IEDate DESC";
+                    tx.executeSql(strSQL, [], function (rx, result) {
 
                         var rlen = result.rows.length;
                         logStep("Total ["+rlen+"] records found in IncomeExpense");
@@ -123,8 +131,8 @@
                                 var divDate = getDiv("incExpDateIE", getDateFromTimeStamp(result.rows.item(i).IEDate));
 
                                 extraMsg = "Creating category div";
-                                logStep("Row:" + i + " Category:" + result.rows.item(i).Category, 0);
-                                var divTitle = getDiv("incExpInfoIE", result.rows.item(i).Category);
+                                logStep("Row:" + i + " Category:" + result.rows.item(i).categoryName, 0);
+                                var divTitle = getDiv("incExpInfoIE", result.rows.item(i).categoryName);
 
                                 extraMsg = "Creating detail div";
                                 logStep("Row:" + i + " Detail:" + result.rows.item(i).IEDetail, 0);
